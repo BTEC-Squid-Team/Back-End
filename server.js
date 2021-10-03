@@ -12,6 +12,7 @@ server.use(cors());
 const getEvents  = require('./modules/event') 
 
 // Routes
+// http://localhost:3001/event?city=paris
 server.get('/', home);
 server.get('/event', getEvents);
 server.get('/test', test);
