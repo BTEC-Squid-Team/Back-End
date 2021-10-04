@@ -16,10 +16,21 @@ const PORT = process.env.PORT;
 
 server.use(express.json()); 
 
+const {getEventHandler} = require('./modules/data')
 
 const getEvents  = require('./modules/event')
 
 const {addEvent} = require('./modules/data')
+
+const {deleteHandler} = require('./modules/data')
+
+const {addComment} = require('./modules/comment')
+
+const {deleteComment} = require('./modules/comment')
+
+const  {updateComment} = require('./modules/comment')
+
+const {getCommentHandler} = require('./modules/comment')
 
 const mongoose = require('mongoose') 
 
@@ -30,7 +41,16 @@ mongoose.connect(`${process.env.MONGO_SERVER_LINK}`);
 server.get('/', home);
 server.get('/event', getEvents);
 server.get('/test', test);
+
+server.get('/getEventHandler', getEventHandler);
 server.post('/addEvent', addEvent);
+server.delete('/deleteHandler', deleteHandler);
+
+server.get('/getCommentHandler', getCommentHandler);
+server.post('/addComment' , addComment);
+server.delete('/deleteComment', deleteComment);
+server.put('/updateComment', updateComment)
+
 server.get('*', notFound);
 
 // Function Handlers
