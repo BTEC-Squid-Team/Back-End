@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
   name: String,
   short_title: String,
   image: String,
+  email: String
 });
 
 const eventModel = mongoose.model("event", eventSchema);
@@ -21,6 +22,7 @@ function seedCatInformation() {
         name : "anyEvents",
         short_title : "anything",
         image: "url",
+    
     });
     // events.save();
 }
@@ -29,7 +31,9 @@ function seedCatInformation() {
 
 async function addEvent(req, res) {
   //   console.log(1111111111,req.body)
-  let { type, datetime_utc, url, city,name, short_title,image} = req.body;
+  let { type, datetime_utc, url, city,name, short_title,image , email} = req.body;
+
+      console.log(11111111111111111,req.body)
 
   await eventModel.create({
     type: type,
@@ -38,18 +42,21 @@ async function addEvent(req, res) {
     city: city,
     name: name,
     short_title: short_title,
-    image: image
+    image: image,
+    email: email
   });
 
-  eventModel.find({ datetime_utc: datetime_utc }, function (error, eventData) {
+  eventModel.find({ email: email }, function (error, emailData) {
     if (error) {
       console.log("error in getting data", error);
     } else {
-      //   console.log(22222222222,emailData)
-      res.send(eventData);
+        console.log(22222222222,emailData)
+      res.send(emailData);
     }
   });
 }
+
+
 
 module.exports={
     addEvent,
