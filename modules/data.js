@@ -28,6 +28,21 @@ function seedCatInformation() {
 }
 // seedCatInformation();
 
+function getEventHandler(req, res) {
+
+  let email = req.query.email;
+  
+  eventModel.find({ email: email }, function (error, eventData) {
+    if (error) {
+      console.log("error in getting data", error);
+    } else {
+      // console.log(bookData)
+      res.send(eventData);
+    }
+  });
+}
+
+
 
 async function addEvent(req, res) {
   //   console.log(1111111111,req.body)
@@ -56,8 +71,25 @@ async function addEvent(req, res) {
   });
 }
 
+function deleteHandler(req, res) {
+  let eventID = req.query.eventID;
+
+  bookModel.deleteOne({ _id: eventID }).then(() => {
+    bookModel.find({ eventID: eventID }, function (error, eventIDData) {
+      if (error) {
+        console.log("error in getting data", error);
+      } else {
+        // console.log(bookIDData)
+        res.send(eventIDData);
+      }
+    });
+  });
+}
+
 
 
 module.exports={
+  getEventHandler,
     addEvent,
+    deleteHandler
 }
