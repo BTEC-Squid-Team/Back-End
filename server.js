@@ -24,13 +24,13 @@ const {addEvent} = require('./modules/data')
 
 const {deleteHandler} = require('./modules/data')
 
-const {addComment} = require('./modules/comment')
+const createComment = require('./modules/addComments')
 
-const {deleteComment} = require('./modules/comment')
+const deleteComment = require('./modules/deleteComments')
 
-const  {updateComment} = require('./modules/comment')
 
-const {getCommentHandler} = require('./modules/comment')
+const  updateComment = require('./modules/updateComments')
+
 
 const mongoose = require('mongoose') 
 
@@ -46,10 +46,11 @@ server.get('/getEventHandler', getEventHandler);
 server.post('/addEvent', addEvent);
 server.delete('/deleteHandler', deleteHandler);
 
-server.get('/getCommentHandler', getCommentHandler);
-server.post('/addComment' , addComment);
-server.delete('/deleteComment', deleteComment);
-server.put('/updateComment', updateComment)
+
+server.post("/addcomment", createComment);
+server.delete("/deletecomment", deleteComment);
+server.put("/updatecomment", updateComment);
+
 
 server.get('*', notFound);
 
