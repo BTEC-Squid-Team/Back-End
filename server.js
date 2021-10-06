@@ -16,20 +16,24 @@ const PORT = process.env.PORT;
 
 server.use(express.json()); 
 
+//components events
 const {getEventHandler} = require('./modules/data')
-
 const getEvents  = require('./modules/event')
-
 const {addEvent} = require('./modules/data')
-
 const {deleteHandler} = require('./modules/data')
 
-const createComment = require('./modules/addComments')
-
-const deleteComment = require('./modules/deleteComments')
 
 
-const  updateComment = require('./modules/updateComments')
+//components BIO
+const {getBioHandler} = require('./modules/Bio')
+const {addBio} = require('./modules/Bio')
+const {updateBio} = require('./modules/Bio')
+
+
+//components Comments
+// const createComment = require('./modules/addComments')
+// const deleteComment = require('./modules/deleteComments')
+// const  updateComment = require('./modules/updateComments')
 
 
 const mongoose = require('mongoose') 
@@ -47,9 +51,16 @@ server.post('/addEvent', addEvent);
 server.delete('/deleteHandler', deleteHandler);
 
 
-server.post("/addcomment", createComment);
-server.delete("/deletecomment", deleteComment);
-server.put("/updatecomment", updateComment);
+ server.get("/getBio", getBioHandler);
+ server.post('/addBio', addBio);
+ server.put("/updateBio", updateBio);
+
+
+
+//servers Comments 
+// server.post("/addcomment", createComment);
+// server.delete("/deletecomment", deleteComment);
+// server.put("/updatecomment", updateComment);
 
 
 server.get('*', notFound);
