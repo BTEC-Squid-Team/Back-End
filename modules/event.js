@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const {commentsMatcher} = require('./CommentsMatcher')
+// const {commentsMatcher} = require('./CommentsMatcher')
 
 async function getEvents (request, response){
 
@@ -18,11 +18,8 @@ async function getEvents (request, response){
                      new EventData(info)
                     
                    );
-                   let filtredData = commentsMatcher(eventDat);
-                   setTimeout(() => {
-                    response.send(filtredData);
-                   }, 300);
-    //  response.send(eventDat);
+                   
+     response.send(eventDat);
    })
    .catch(error => {
             response.send(error)
